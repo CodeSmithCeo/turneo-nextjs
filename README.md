@@ -9,3 +9,8 @@
 - in describing return types from BE we can use Zod instead TS only but that requires either insight into BE data types (can be neatly done trough Swagger type descriptions)
 - urlLow is used details, onClick there can be a modal preview of urlHigh image
 - maps can be added to improve showing of the location
+- local time of a user needs to be stored and displayed on relevant places with an ability to change it
+- utility transformers fo datetime need to have multiple options per date, time and datetime and x language in order to fully satisfy all use cases
+- not a lot of emphasis is put on styles - styles need to use cva and cn and be detached from JSX for better readability
+- a lot of the components can be broken down to smaller reuseable ones - start with design system - make basic ones out of shadcdn templates and then work your way up with HOC, composed components etc keeping in mind the SSR and CSR boundaries
+- a lot of transformers are still missing - data presentation is RAW

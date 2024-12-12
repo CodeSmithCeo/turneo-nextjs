@@ -12,6 +12,12 @@ type AvailabilityDetails = {
   discount: number; // Discount applicable for this availability
 };
 
+type Duration = {
+  days: number;
+  hours: number;
+  minutes: number;
+}
+
 type RateOption = {
   id: string; // A unique identifier for the rate within the platform
   experienceId: string; // A unique identifier for the experience
@@ -24,7 +30,7 @@ type RateOption = {
   availabilitySource: string | null; // Source of the availability information (e.g., Turneo)
   externalId: string | null; // External system identifier (UUID)
   availabilityType: 'LIVE' | 'ON_REQUEST'; // Type of booking (instant or approval required)
-  duration: string; // Duration in HH:mm format
+  duration: Duration
   note: string | null; // Special note to be sent to guests
   rateTypesPrices: RateOptionPrice[]; // Rate options and prices associated with each type
   bookingFields: BookingField[]; // List of fields for booking
@@ -80,7 +86,7 @@ type OpeningTimes = {
   toTime: string; // End time for the opening hours
 };
 
-type ExperienceRatesResponse = {
+type ExperienceRates= {
   count: number; // Total count of objects found
   next: string | null; // Link to the next set of paginated results
   previous: string | null; // Link to the previous set of paginated results

@@ -13,22 +13,25 @@
     "precommit": "pnpm lint && pnpm check-types"
   },
   "dependencies": {
+    "dayjs": "^1.11.13",
+    "next": "14.2.20",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.20"
+    "tailwind-merge": "^2.5.5"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.20",
+    "postcss": "^8",
     "prettier": "^3.3.3",
     "prettier-eslint": "^16.3.0",
     "prettier-plugin-tailwindcss": "^0.6.9",
-    "class-variance-authority": "^0.7.0"
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   }
 }
