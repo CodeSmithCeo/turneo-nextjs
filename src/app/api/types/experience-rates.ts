@@ -1,9 +1,11 @@
+// RATES
+
 type PaginationLinks = {
   next: string | null; // Link to the next set of paginated results
   previous: string | null; // Link to the previous set of paginated results
 };
 
-type AvailabilityDetails = {
+export type AvailabilityDetails = {
   availabilityId: string; // Unique identifier for the availability
   availabilityStatus: 'SELLING' | 'SOLD_OUT' | 'UNAVAILABLE'; // Current status of the availability
   localTime: string; // Local time of the experience
@@ -12,13 +14,13 @@ type AvailabilityDetails = {
   discount: number; // Discount applicable for this availability
 };
 
-type Duration = {
+export type Duration = {
   days: number;
   hours: number;
   minutes: number;
 }
 
-type RateOption = {
+export type RateOption = {
   id: string; // A unique identifier for the rate within the platform
   experienceId: string; // A unique identifier for the experience
   rateStatus: 'ACTIVE' | 'INACTIVE'; // Current status of the rate
@@ -86,7 +88,7 @@ type OpeningTimes = {
   toTime: string; // End time for the opening hours
 };
 
-type ExperienceRates= {
+export type ExperienceRates = {
   count: number; // Total count of objects found
   next: string | null; // Link to the next set of paginated results
   previous: string | null; // Link to the previous set of paginated results

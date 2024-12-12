@@ -1,17 +1,19 @@
 import {datetimeStringToDate, formatDuration} from '@/utils/date-time';
 import PostButton from './schedule-button';
+import { ExperienceRates } from '@/app/api/types/experience-rates';
+import { Experience } from '@/app/api/types/experience';
 
 export type Props = {
+  experience: Experience ,
   rates: ExperienceRates
 }
 
-const ExperienceAvailability =  ({ rates }: Props) => {
+const ExperienceAvailability =  ({ rates, experience }: Props) => {
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Experience Availability</h1>
-      <div className="text-gray-600">
-        <p>Total Rates Found: {rates?.count}</p>
-        <div className="flex justify-between mt-4">
+      <h1 className="text-2xl font-bold">Experience Availability ({rates?.count} rates in total)</h1>
+      {rates.previous || rates.next && <div className="text-gray-100">
+         <div className="flex justify-between mt-4">
           {rates.previous && (
             <a href={rates.previous} className="text-blue-500">
               Previous
@@ -23,10 +25,10 @@ const ExperienceAvailability =  ({ rates }: Props) => {
             </a>
           )}
         </div>
-      </div>
+      </div>}
       <div className="space-y-8">
         {rates.results.map((rate) => (
-          <div key={rate.id} className="p-4 border rounded-md shadow-sm bg-white">
+          <div key={rate.id} className="p-4 border rounded-md shadow-sm">
             <h2 className="text-xl font-semibold"><strong>{String(rate.rateName)}</strong></h2>
             <p><strong>Rate Status:</strong> {String(rate.rateStatus)}</p>
             <p><strong>Rate Code:</strong> {rate.rateCode ? String(rate.rateCode) : "N/A"}</p>
@@ -46,7 +48,7 @@ const ExperienceAvailability =  ({ rates }: Props) => {
                         &nbsp; ({availability.availableQuantity} spots)
                         {availability.discount > 0 && ` | Discount: ${availability.discount}%`}
                       </span>
-                      <PostButton availabilityId={availability.availabilityId} />
+                      <PostButton rate={rate} experience={experience} availability={availability} />
                     </li>
                   ))}
                 </ul>

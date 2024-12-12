@@ -1,4 +1,4 @@
-import { Experience } from "@/api/types/experience";
+import { Experience } from "@/app/api/types/experience";
 import Image from "next/image";
 
 export type Props = { experience: Experience };

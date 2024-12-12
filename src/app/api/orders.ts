@@ -10,11 +10,15 @@ class OrdersApi {
     this.client = client;
   }
 
-  async postOrder(orderData: OrderRequest): Promise<Order> {
-    return this.client.fetch(`/orders`, {
+  async createOrder(orderData: OrderRequest): Promise<any> {
+    return this.client.fetch(`orders`, {
       method: 'POST',
-      "Content-Type": "application/json"
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderData),
     });
   }
+
 }
 export { OrdersApi };

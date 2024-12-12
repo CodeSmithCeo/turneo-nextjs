@@ -2,17 +2,21 @@
 
 import { useState } from "react";
 import { cva } from "class-variance-authority";
-import { cn } from '@/utils/tailwind-cn' 
+import { cn } from "@/utils/tailwind-cn";
+import { createOrder } from "@/feature/order/actions"
+import { travelerInformation, newOrder, booking as bookingMock } from "@/mock/new-order-data";
+import { AvailabilityDetails, RateOption } from "@/app/api/types/experience-rates";
+import { Experience } from "@/app/api/types/experience";
 
 // Define button styles using cva
 const buttonStyles = cva(
-  "ml-4 px-3 py-1 text-sm rounded-md transition-colors",
+  "ml-4 px-4 py-2 text-sm rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2",
   {
     variants: {
       state: {
-        default: "bg-blue-500 text-white hover:bg-blue-600",
-        loading: "bg-gray-300 text-gray-600",
-        success: "bg-green-500 text-white",
+        default: "bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500",
+        loading: "bg-gray-300 text-gray-600 cursor-not-allowed",
+        success: "bg-green-600 text-white hover:bg-green-700 focus:ring-green-500",
       },
     },
     defaultVariants: {
@@ -21,33 +25,34 @@ const buttonStyles = cva(
   }
 );
 
-const PostButton = ({ availabilityId }: { availabilityId: string }) => {
+type Props = {
+  rate: RateOption;
+  availability: AvailabilityDetails;
+   experience: Experience;
+}
+
+const PostButton = ({ rate, availability, experience }: Props) => {
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
 
   const handlePost = async () => {
     setLoading(true);
-    setSuccess(false);
 
-    try {
-      const response = await fetch("/api/availability", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ availabilityId }),
-      });
-
-      if (response.ok) {
-        setSuccess(true);
-      } else {
-        console.error("Failed to post data");
-      }
-    } catch (error) {
-      console.error("Error posting data:", error);
-    } finally {
-      setLoading(false);
+    const booking = {...bookingMock, rateId: rate.id,
+      reseller: experience.organizer,
+      availabilityId: availability.availabilityId
     }
+
+    const data = {
+      ...newOrder,
+      travelerInformation,
+      bookings: [
+        booking
+      ]
+    }
+
+    await createOrder(data);
+
+    setLoading(false);
   };
 
   return (
@@ -55,10 +60,12 @@ const PostButton = ({ availabilityId }: { availabilityId: string }) => {
       onClick={handlePost}
       disabled={loading}
       className={cn(
-        buttonStyles({ state: loading ? "loading" : success ? "success" : "default" })
+        buttonStyles({
+          state: loading ? "loading" : "default",
+        })
       )}
     >
-      {loading ? "Processing..." : success ? "Posted!" : "Post"}
+      {loading ? "Processing..." : "Book"}
     </button>
   );
 };

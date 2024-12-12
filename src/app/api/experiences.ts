@@ -1,6 +1,7 @@
 import { HttpRequest } from './request';
 import { Experience } from './types/experience';
 import { buildQueryParams } from '@/utils/url-query'
+import { ExperienceRates } from './types/experience-rates';
 
 
 class ExperiencesApi {

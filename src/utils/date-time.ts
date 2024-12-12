@@ -1,3 +1,4 @@
+import { Duration } from '@/app/api/types/experience-rates';
 import dayjs from 'dayjs'
 
 // this needs to be extended with various types named under each language for both date datetime, time etc..
@@ -9,7 +10,7 @@ const datetimeStringToDate = (datetime: string) => {
 const formatDuration = (duration: Duration): string => {
   const { days, hours, minutes } = duration;
 
-  const parts = [];
+  const parts: string[] = [];
   if (days > 0) parts.push(`${days} day${days > 1 ? "s" : ""}`);
   if (hours > 0) parts.push(`${hours} hour${hours > 1 ? "s" : ""}`);
   if (minutes > 0) parts.push(`${minutes} minute${minutes > 1 ? "s" : ""}`);

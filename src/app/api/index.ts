@@ -1,11 +1,10 @@
 import { ExperiencesApi } from './experiences';
 import { OrdersApi } from './orders';
 import { HttpRequest } from './request';
-
 class Api {
 
   experiences: ExperiencesApi;
-  orders: OrdersApi;
+  orders: OrdersApi;  
   
   constructor() {
     const baseURL = process.env.API_URL || '';
