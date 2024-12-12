@@ -1,16 +1,16 @@
-import { CompaniesApi } from './companies';
+import { ExperiencesApi } from './experiences';
 import { HttpRequest } from './request';
 
 class Api {
 
-  companies: CompaniesApi;
+  experiences: ExperiencesApi;
   
   constructor() {
     const baseURL = process.env.API_URL || '';
-    if (baseURL) throw new Error('API_URL is not propperly set in env');
+    if (!baseURL) throw new Error('API_URL is not propperly set in env');
     const client = new HttpRequest({ baseURL });
  
-    this.companies = new CompaniesApi(client);
+    this.experiences = new ExperiencesApi(client);
   }
 }
 

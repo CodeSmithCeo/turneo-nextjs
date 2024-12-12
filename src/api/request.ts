@@ -23,9 +23,8 @@ class HttpRequest {
 
       const url = `${this.baseURL}/${resource}`;
       const fetchResult = await fetch(url, options);
-
       if (fetchResult.ok) {
-        return options.response ? fetchResult : (await fetchResult.json()).data || {};
+        return options.response ? fetchResult : (await fetchResult.json()) || {};
       }
       throw new Error('Bad fetch response');
     } catch (error: any) {
